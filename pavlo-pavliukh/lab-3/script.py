@@ -19,12 +19,12 @@ else:
     print("Each statements is not True.")
 
 
-name, age = "Andrii", 19
+name, age = "Pavlo", 19
 
-if name == "Andrii" and age == 19:
-    print("My name is Andrii, and my age also 19 years old.")
-if name == "Andrii" or name == "Andrew":
-    print("My name is either Andrii or Andrew.")
+if name == "Pavlo" and age == 19:
+    print("My name is Pavlo, and my age also 19 years old.")
+if name == "Pavlo" or name == "Pablo":
+    print("My name is either Pavlo or Pablo.")
 
 
 # == і is
