@@ -1,10 +1,33 @@
-from formatter import print_vehicles
+from abc import ABC, abstractmethod
 
 from registry_system import RegistrySystem
 from vehicles import Vehicle, VehicleStatus
 
 
-class UserInputInterface:
+class Interface(ABC):
+    """Represent base Interface and describes base methods"""
+
+    def __init__(self, registry: RegistrySystem) -> None:
+        ...
+
+    @abstractmethod
+    def add_vehicle(self) -> None:
+        ...
+
+    @abstractmethod
+    def edit_vehicle(self) -> None:
+        ...
+
+    @abstractmethod
+    def delete_vehicle(self) -> None:
+        ...
+
+    @abstractmethod
+    def mainloop(self) -> None:
+        ...
+
+
+class UserInputInterface(Interface):
     def __init__(self, registry: RegistrySystem) -> None:
         self.registry = registry
 
@@ -39,16 +62,13 @@ class UserInputInterface:
         vehicle_id = self.get_input_vehicle_id()
         self.registry.delete_vehicle(vehicle_id)
 
-    def show_vehicles(self) -> None:
-        print_vehicles(self.registry.vehicles)
-
     def mainloop(self) -> None:
         try:
             actions = {
                 "add": self.add_vehicle,
                 "edit": self.edit_vehicle,
                 "delete": self.delete_vehicle,
-                "show": self.show_vehicles,
+                "show": self.registry.show_vehicles,
                 "exit": exit,
             }
             while True:

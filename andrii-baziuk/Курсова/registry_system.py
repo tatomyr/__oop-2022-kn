@@ -1,3 +1,5 @@
+from formatter import print_vehicles
+
 from exceptions import VehicleMissingError
 from storages import Storage
 from vehicles import Vehicle
@@ -48,3 +50,7 @@ class RegistrySystem:
         removed_vehicle = self.vehicles.pop(id)
         self.storage.remove(id)
         print(f"Vehicle with id {id} removed")
+
+    def show_vehicles(self) -> None:
+        """Prints vehicles using the format function"""
+        print_vehicles(self.vehicles)

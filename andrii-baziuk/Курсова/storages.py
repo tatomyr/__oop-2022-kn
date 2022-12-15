@@ -63,8 +63,14 @@ class PlainTextStorage(Storage):
         self._file = file
 
     def save(self, id: int, vehicle: Vehicle) -> None:
-        with open(self._file, "a", encoding="utf-8") as f:
-            f.write(self._format(id, vehicle))
+        data = self.read()
+        data[id] = vehicle
+        self._write(data)
+
+    def remove(self, id: int) -> None:
+        data = self.read()
+        data.pop(id)
+        self._write(data)
 
     def read(self) -> dict[int, str]:
         with open(self._file, "r", encoding="utf-8") as f:
@@ -77,7 +83,7 @@ class PlainTextStorage(Storage):
 
         return data
 
-    def write(self, history: dict[int, str]) -> None:
+    def _write(self, history: dict[int, str]) -> None:
         with open(self._file, "w", encoding="utf-8") as f:
             for id, vehicle in history.items():
                 f.write(self._format(id, vehicle))
