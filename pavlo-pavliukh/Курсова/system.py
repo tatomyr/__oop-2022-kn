@@ -24,6 +24,7 @@ class ControlSystem:
     def add_employee(self):
         employee = self.input_employee()
         self.employees[employee.nums_of_emps] = employee
+        print(f"Працівника з id {employee.nums_of_emps} додано: {employee}")
 
     def find_employee(self, id):
         return self.employees.get(id)
